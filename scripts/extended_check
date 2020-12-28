@@ -1,0 +1,18 @@
+#!/bin/zsh
+
+
+prog1="$1"
+prog2="$2"
+gen="$3"
+
+for ((i=1; i <= 1000000; ++i)); do
+	./$gen > t.in
+	./$prog1 < t.in > $prog1.out
+	./$prog2 < t.in > $prog2.out
+	if diff -w $prog1.out $prog2.out >/dev/null; then
+		echo "OK $i"
+	else
+		echo "Wrong Answer"
+		break
+	fi
+done

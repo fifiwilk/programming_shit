@@ -1,0 +1,13 @@
+#!/bin/zsh
+
+for ((i=1; i <= 1000000; ++i)); do
+	./gen > t.in
+	./main < t.in > main.out
+	./brute < main.out > brute.out
+	if diff -w main.out brute.out >/dev/null; then
+		echo "OK $i"
+	else
+		echo "Wrong Answer"
+		break
+	fi
+done
